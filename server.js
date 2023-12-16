@@ -1,7 +1,7 @@
 // dependencies
 const express = require('express');
 const path = require('path');
-const api = require('./routes/index')
+const api = require('./routes/index');
 
 const app = express();
 const PORT = 3001;
@@ -9,7 +9,7 @@ const PORT = 3001;
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use('/api', api);
+app.use('/api', api);
 
 
 // static middleware points to public folder

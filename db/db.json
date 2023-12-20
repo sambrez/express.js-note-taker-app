@@ -1,6 +1,17 @@
 [
     {
-      "title": "New Note",
-      "text": "Test text"
+        "title": "Grocery Shop",
+        "text": "eggs\nbread",
+        "id": "bgfqjx0lqd59eo5"
+    },
+    {
+        "title": "Return package",
+        "text": "deadline 12/23",
+        "id": "bgfqjx0lqd5a089"
+    },
+    {
+        "title": "Monday Meeting",
+        "text": "@ 8am",
+        "id": "bgfqjx0lqd5az8r"
     }
 ]

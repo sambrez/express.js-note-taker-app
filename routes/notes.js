@@ -1,21 +1,20 @@
 // dependencies
-const express = require('express');
-const notes = express.Router();
+const notes = require('express').Router();
 const fs = require('fs');
 const uniqid = require('uniqid');
 
 // GET request to view list already existing notes
-notes.get('/api/notes', (request, response) => {
+notes.get('/', (request, response) => {
   // Log that a GET request was received
   console.info(`${request.method} request received for notes`);
 
-  fs.readFile('../db/db.json', (error, data) =>
+  fs.readFile('./db/db.json', (error, data) =>
     error ? console.error(error) : response.json(JSON.parse(data))
   );
 });
 
 // POST Route for submitting new note
-notes.post('/api/notes', (request, response) => {
+notes.post('/', (request, response) => {
   // Log that a POST request was received
   console.info(`${request.method} request received to submit new note`);
 
@@ -32,7 +31,7 @@ notes.post('/api/notes', (request, response) => {
     };
 
     // get existing notes
-    fs.readFile('../db/db.json', 'utf8', (error, data) => {
+    fs.readFile('./db/db.json', 'utf8', (error, data) => {
       if (error) {
         console.error(error);
       } else {
@@ -44,7 +43,7 @@ notes.post('/api/notes', (request, response) => {
 
         // Write updated Notes back to the file
         fs.writeFile(
-          '../db/db.json',
+          './db/db.json',
           JSON.stringify(parsedNotes, null, 4),
           (writeErr) =>
             writeErr
@@ -66,9 +65,11 @@ notes.post('/api/notes', (request, response) => {
   }
 });
 
-notes.delete('/api/notes/:id', (request, response) => {
+notes.delete('/:id', (request, response) => {
+  console.info(`${request.method} request received`);
+  
   // read the file as it exists 
-  fs.readFile('../db/db.json', 'utf8', (error, data) => {
+  fs.readFile('./db/db.json', 'utf8', (error, data) => {
     if (error) {
       console.error(error);
     } else {
@@ -83,7 +84,7 @@ notes.delete('/api/notes/:id', (request, response) => {
         if (currentNote.id !== noteID) {
           // push the remaining notes to a new db file to rewrite the file
           newDB.push(currentNote);
-          fs.writeFile('../db/db.json', JSON.stringify(newDB, null, 3),
+          fs.writeFile('./db/db.json', JSON.stringify(newDB, null, 3),
             (writeErr) =>
               writeErr
                 ? console.error(writeErr)
@@ -92,7 +93,10 @@ notes.delete('/api/notes/:id', (request, response) => {
         }
       }
     }
-  })
+  });
+  fs.readFile('./db/db.json', (error, data) =>
+    error ? console.error(error) : response.json(JSON.parse(data))
+  );
 });
 
 module.exports = notes;

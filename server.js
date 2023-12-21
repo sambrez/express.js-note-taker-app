@@ -25,7 +25,7 @@ app.get('/notes', (request, response) =>
   response.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
-// listens for connections on port 3001
+// listens for connections on specified port
 app.listen(PORT, () =>
   console.log(`Note Taker app listening at http://localhost:${PORT}`)
 );

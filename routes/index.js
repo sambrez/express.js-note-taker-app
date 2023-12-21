@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
 // import of modular route for /notes
 const notesRouter = require('./notes.js');
